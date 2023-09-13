@@ -3,8 +3,7 @@ from pygame.locals import *
 import sys
 import time
 import random
-
-# 750 x 500    
+   
     
 class Game:
    
@@ -23,6 +22,7 @@ class Game:
         self.end = False
         self.HEAD_C = (255,213,102)
         self.TEXT_C = (240,240,240)
+        self.TEXT_R = (255,0,0)
         self.RESULT_C = (255,70,70)
         
        
@@ -94,6 +94,9 @@ class Game:
             pygame.draw.rect(self.screen,self.HEAD_C, (50,250,650,50), 2)
             # update the text of user input
             self.draw_text(self.screen, self.input_text, 274, 26,(250,250,250))
+            # code to turn self.text red if the user types the wrong word
+            #if self.word != self.input_text:
+                #self.draw_text(self.screen, self.input_text, 200, 28,self.TEXT_R)
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -116,6 +119,9 @@ class Game:
                     if self.active and not self.end:
                         if event.key == pygame.K_RETURN:
                             print(self.input_text)
+                            if self.word != self.input_text:
+                                self.draw_text(self.screen, self.input_text, 200, 28,self.TEXT_R)
+                                pygame.display.update()
                             self.show_results(self.screen)
                             print(self.results)
                             self.draw_text(self.screen, self.results,350, 28, self.RESULT_C)  
